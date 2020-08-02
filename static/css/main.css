@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+#card_form {
+    display: block;
+    width: 10%;
+    height: 30%;
+    left: 45%;
+    top: 35%;
+    position: relative;
+}
+
+#card_form * {
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box 
+}
