@@ -12,8 +12,20 @@ html, body {
     position: relative;
 }
 
-#card_form * {
+#card_form > * {
     width: 100%;
     margin-top: 5px;
-    box-sizing: border-box 
+    box-sizing: border-box;
+}
+
+#expiration_month, #expiration_year {
+    width: 70px;
+}
+
+#expiration_month {
+    float: left;
+}
+
+#expiration_year {
+    float: right;
 }

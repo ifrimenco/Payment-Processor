@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
 {% block head%}
-
-
+<title>Payment Processor</title>
 {% endblock %}
 
 {% block body %}
 
-<form id ="card_form">
-    <label for="cardnumber">Credit Card Number:</label>
-    <input type="text" id="cardnumber" name="cardnumber" required>
-    <label for="cardholder">Card Holder:</label>
-    <input type="text" id="cardnumber" name="cardnumber" required>
-    <label for="cardnumber">Expiration Date:</label>
-    <input type="text" id="cardnumber" name="cardnumber" required>
-    <label for="ceardnumber">Security Code:</label>
-    <input type="text" id="cardnumber" name="cardnumber">
-    <label for="cardnumber">Amount:</label>
-    <input type="text" id="cardnumber" name="cardnumber" required>
+<form id="card_form" action="/" method="POST">
+    <label for="card_number">Credit Card Number:</label>
+    <input type="text" id="card_number" name="card_number" required>
+    <label for="card_holder">Card Holder:</label>
+    <input type="text" id="card_holder" name="card_holder" required>
+    <div id="expiration_date" style="display:block; height:30px;">
+        <div style="float: left; width: 80px;">
+            <label for="expiration_month">Exp. Month</label>
+            <input type="number" min="1" id="expiration_month" name="expiration_month" required>
+        </div>
+        <div style="float: right; width: 70px;">
+            <label for="expiration_year" style="float: right; margin-right: 2px">Exp. Year</label>
+            <input type="number" min="1" id="expiration_year" name="expiration_year" required>
+        </div>
+    </div>
+    <label for="security_code">Security Code:</label>
+    <input type="text" id="security_code" name="security_code">
+    <label for="amount">Amount:</label>
+    <input type="number" min="1" id="amount" name="amount" required>
     <input type="submit" style="margin-top: 15px">
 </form>
 
