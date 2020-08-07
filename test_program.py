@@ -2,6 +2,7 @@ import pytest
 
 from flask import Flask, request
 import process_payment
+from PriceEstimator import PriceEstimator
 
 def test_payment_succes():
     app = process_payment.app
@@ -89,3 +90,9 @@ def test_prediction_succes():
                         'stock': 'AA'
                     })
         assert response.status_code == 200
+
+
+def test_estimator_class():
+    p = PriceEstimator()
+    predicted = p.make_prediction()
+    assert (predicted != [])

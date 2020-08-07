@@ -36,4 +36,5 @@ def estimate_price():
             p.make_prediction()
             return 'Hello, World!', 200
         except:
+            a = 3
             return '500 Internal Server Error', 500

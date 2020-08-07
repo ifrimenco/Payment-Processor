@@ -13,7 +13,7 @@ from errors import InvalidDataError
 
 import collections
 
-# Indexes values:
+# Indexes values - values for the dimensions of the Knn Algorithm:
     # date - 0
     # open - 1
     # high - 2
@@ -30,22 +30,27 @@ import collections
     # percent_return_next_dividend - 13
 
 class PriceEstimator:
-    def __init__(self, request):                                  
-        self.date = datetime.date(year = int(request.form.get("year")),
-                                    month = int(request.form.get("month")),
-                                    day = int(request.form.get("day")))
-        self.date = get_last_friday(date)
-        self.stock = request.form.get("stock")
+    def __init__(self, request = None):                                  
+        if request != None:
+            if request.form.get("year") != '':
+                self.date = datetime.date(year = int(request.form.get("year")),
+                                            month = int(request.form.get("month")),
+                                            day = int(request.form.get("day")))
+                self.date = get_last_friday(date)
+                self.stock = request.form.get("stock")
+        else:
+            self.stock = 'AA'
         self.indexes = [5, 6, 12, 13] # the dimensions for the Knn algorithm
         self.train_data, self.test_data = preprocess(self.stock, self.indexes)
 
 
     def make_prediction(self):
         train_data, test_data = self.train_data, self.test_data
+        predicted_prices = []
         for test in test_data:                                              # prediction is made for the week coming after the test week
             predicted_price = knn(train_data, test, self.indexes)
-            print(predicted_price)
-    
+            predicted_prices.append(predicted_price)
+        return predicted_prices
 
 def preprocess(stock, indexes):
     df = pd.read_csv("data/dow_jones_index.data")                           # reading from the file
@@ -137,3 +142,6 @@ def knn(train_data, test, indexes, k = 2):
     
     return price_sum / k
 get_last_friday(datetime.date(year =2011, month = 4, day = 4))
+
+p = PriceEstimator()
+p.make_prediction()
