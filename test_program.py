@@ -74,7 +74,18 @@ def test_bad_request_negative_amount():
                         'expiration_year': 2023,
                         'security_code': 252,
                         'amount': -5
-                    })
+                        })
         assert response.status_code == 400
 
 
+def test_prediction_succes():
+    app = process_payment.app
+    with app.test_client() as client:
+        response = client.post('/estimate-price',
+                    data = {
+                        'year': '2011',
+                        'month': '4',
+                        'day': '8',
+                        'stock': 'AA'
+                    })
+        assert response.status_code == 200
